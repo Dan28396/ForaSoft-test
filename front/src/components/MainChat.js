@@ -5,16 +5,18 @@ import {ChatContext} from '../context/ChatContext';
 import {socket} from '../context/socket';
 
 function MainChat(props) {
-  const {name, room, setRoom} = useContext(ChatContext);
+  const {name} = useContext(ChatContext);
   const [messages, setMessages] = useState([]);
-  setRoom(useParams().room);
-
+  const {room} = useParams();
   const history = useHistory();
 
   useEffect(() => {
     if (!name) {
       history.push('/');
     }
+    socket.on('message', message => {
+      setMessages(messages => [...messages, message]);
+    });
   }, []);
 
   useEffect(() => {
@@ -24,10 +26,10 @@ function MainChat(props) {
   }, [room]);
 
   useEffect(() => {
-    socket.on('message', message => {
-      setMessages(messages => [...messages, message]);
+    return history.listen(() => {
+      socket.emit('logout');
     });
-  }, []);
+  }, [history]);
 
   const pushNewMessage = event => {
     if ((event.key === 'Enter' || event.key === 'NumpadEnter') &&

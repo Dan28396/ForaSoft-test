@@ -32,6 +32,13 @@ io.on('connection', (socket) => {
             {name: message.name, text: message.text, time: message.time});
   });
 
+  socket.on('logout', () => {
+    const user = deleteUser(socket.id);
+    if (user) {
+      io.in(user.room).emit('updateUsers', getUsers(user.room));
+    }
+  });
+
   socket.on('disconnect', () => {
     const user = deleteUser(socket.id);
     if (user) {

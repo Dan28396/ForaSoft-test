@@ -4,10 +4,9 @@ const ChatContext = React.createContext();
 
 const ChatProvider = ({children}) => {
   const [name, setName] = useState(localStorage.getItem('name') || '');
-  const [room, setRoom] = useState('');
 
   return (
-      <ChatContext.Provider value={{name, room, setName, setRoom}}>
+      <ChatContext.Provider value={{name, setName}}>
         {children}
       </ChatContext.Provider>
   );

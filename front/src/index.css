@@ -212,6 +212,11 @@ input:focus {
     margin-right: 10px;
 }
 
+.change_name_link {
+    color: white;
+    margin: auto;
+}
+
 
 /*Scorllbar*/
 

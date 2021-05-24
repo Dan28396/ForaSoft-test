@@ -1,5 +1,6 @@
 import React, {useState} from 'react';
 import UsersBar from './UsersBar';
+import {Link} from 'react-router-dom';
 
 function SideBars(props) {
   const [usersSidebar, setUsersSidebar] = useState(false);
@@ -27,6 +28,7 @@ function SideBars(props) {
                     d="M3,6H21V8H3V6M3,11H21V13H3V11M3,16H21V18H3V16Z"/>
             </svg>
           </button>
+          <Link className="change_name_link" to="/">Change username</Link>
           <button className="menu_btn" onClick={showVideoSidebar}>
             <svg className="menu_btn_img" viewBox="0 0 24 24">
               <path fill="#fff"
