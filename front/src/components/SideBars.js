@@ -1,4 +1,5 @@
 import React, {useState} from 'react';
+import UsersBar from './UsersBar';
 
 function SideBars(props) {
   const [usersSidebar, setUsersSidebar] = useState(false);
@@ -36,6 +37,7 @@ function SideBars(props) {
         <nav className={usersSidebar ?
             'nav_menu nav_left active' :
             'nav_menu nav_left'}>
+          <UsersBar/>
         </nav>
         <nav className={videoSidebar ?
             'nav_menu nav_right active' :

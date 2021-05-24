@@ -12,6 +12,20 @@ code {
     monospace;
 }
 
+h1 {
+    color: white;
+    margin: 0;
+}
+
+h3 {
+    color: white;
+    margin: 0 0 10px;
+}
+
+input:focus {
+    outline: none;
+}
+
 .home_wrapper {
     display: flex;
     justify-content: center;
@@ -33,6 +47,10 @@ code {
     max-height: 800px;
     position: relative;
     overflow: hidden;
+}
+
+.login {
+    grid-template-rows: 1fr;
 }
 
 .chat_wrapper {
@@ -58,7 +76,7 @@ code {
     margin: 0;
 }
 
-.message_username {
+.message_name {
     color: #999;
     justify-self: left;
     align-self: center;
@@ -86,13 +104,13 @@ code {
 .message_input {
     margin: auto;
     width: 90%;
-    height: 25px;
+    height: 20px;
     border-radius: 6px;
     background-color: #444446;
     border: solid 1px #666666;
     color: white;
+    padding: 5px;
 }
-
 
 .bar_wrapper {
     height: 100%;
@@ -121,7 +139,7 @@ code {
 
 .nav_menu {
     width: 100%;
-    height: 100%;
+    height: calc(100% - 40px);
     position: absolute;
     transition: 450ms;
     margin-top: 40px;
@@ -148,3 +166,67 @@ code {
     transition: 450ms;
 }
 
+.hr_horizontal {
+    border: solid 1px #666666;
+    width: 80%;
+    margin: 0 auto;
+}
+
+.users_list_wrapper {
+    padding: 10px;
+    height: calc(100% - 20px);
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+}
+
+.users_list {
+    margin: 10px 0;
+    overflow-y: auto;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.users_list_item {
+    color: #999;
+    margin: 3px 0;
+}
+
+.enter_username_wrapper {
+    background-color: #333336;
+    display: flex;
+    justify-content: center;
+    align-content: center;
+}
+
+.username_input_wrapper {
+    display: flex;
+    flex-direction: column;
+    margin: auto;
+}
+
+.username_input_label {
+    vertical-align: middle;
+    color: white;
+    margin-right: 10px;
+}
+
+
+/*Scorllbar*/
+
+.scrollable::-webkit-scrollbar-track {
+    -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+    background-color: #fff;
+    padding: 10px 0;
+}
+
+.scrollable::-webkit-scrollbar {
+    width: 10px;
+    background-color: #fff;
+}
+
+.scrollable::-webkit-scrollbar-thumb {
+    -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, .3);
+    background-color: #666;
+}
