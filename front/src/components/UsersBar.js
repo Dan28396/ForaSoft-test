@@ -1,8 +1,7 @@
-import React, {useState, useContext, useEffect} from 'react';
-import {SocketContext} from '../context/socketContext';
+import React, {useState, useEffect} from 'react';
+import {socket} from '../context/socket';
 
 function UsersBar(props) {
-  const socket = useContext(SocketContext);
   const [users, setUsers] = useState([]);
 
   useEffect(() => {

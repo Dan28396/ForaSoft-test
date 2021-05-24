@@ -1,11 +1,9 @@
-import React, {useContext, useEffect, useState} from 'react';
+import React, {useContext, useEffect} from 'react';
 import {useHistory} from 'react-router-dom';
-import {SocketContext} from '../context/socketContext';
+import {ChatContext} from '../context/ChatContext';
 
 function Login(props) {
-  const socket = useContext(SocketContext);
-  const [name, setUsername] = useState(
-      localStorage.getItem('name') || '');
+  const {name, setName} = useContext(ChatContext);
   const history = useHistory();
 
   const redirectToRoom = event => {
@@ -23,9 +21,9 @@ function Login(props) {
       <div className="main_wrapper login">
         <div className="enter_username_wrapper">
           <div className="username_input_wrapper">
-            <h3>Please specify name and press Enter key.</h3>
+            <h3>Please, specify name and press Enter key.</h3>
             <input className="message_input" value={name}
-                   onChange={(e) => setUsername(e.target.value)}
+                   onChange={(e) => setName(e.target.value)}
                    onKeyUp={(e) => redirectToRoom(e)}/>
           </div>
         </div>

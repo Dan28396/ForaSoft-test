@@ -1,14 +1,13 @@
 import React, {useEffect, useState, useContext} from 'react';
 import SideBars from './SideBars';
 import {useHistory, useParams} from 'react-router-dom';
-import {SocketContext} from '../context/socketContext';
+import {ChatContext} from '../context/ChatContext';
+import {socket} from '../context/socket';
 
 function MainChat(props) {
-  const socket = useContext(SocketContext);
+  const {name, room, setRoom} = useContext(ChatContext);
   const [messages, setMessages] = useState([]);
-  const [name, setname] = useState(
-      localStorage.getItem('name') || '');
-  let {room} = useParams();
+  setRoom(useParams().room);
 
   const history = useHistory();
 
@@ -16,14 +15,19 @@ function MainChat(props) {
     if (!name) {
       history.push('/');
     }
-    socket.emit('login', {name, room});
   }, []);
 
   useEffect(() => {
-    socket.on('message', msg => {
-      setMessages([...messages, msg]);
+    if (room) {
+      socket.emit('login', {name, room});
+    }
+  }, [room]);
+
+  useEffect(() => {
+    socket.on('message', message => {
+      setMessages(messages => [...messages, message]);
     });
-  });
+  }, []);
 
   const pushNewMessage = event => {
     if ((event.key === 'Enter' || event.key === 'NumpadEnter') &&
@@ -39,7 +43,11 @@ function MainChat(props) {
 
   function parseTimestamp(time) {
     const date = new Date(time);
-    return `${date.getHours()}:${date.getMinutes()}`;
+    return `${date.getHours() < 10 ?
+        '0' + date.getHours() :
+        date.getHours()}:${date.getMinutes() < 10 ?
+        '0' + date.getMinutes() :
+        date.getMinutes()}`;
   }
 
   return (
@@ -55,7 +63,8 @@ function MainChat(props) {
           })}
         </div>
         <div className="message_input_wrapper">
-          <input className="message_input" type="text"
+          <input className="message_input" placeholder="Напишите сообщение..."
+                 type="text"
                  onKeyUp={(e) => pushNewMessage(e)}/>
         </div>
       </div>
